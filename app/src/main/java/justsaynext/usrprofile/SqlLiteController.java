@@ -28,7 +28,7 @@ public class SqlLiteController extends SQLiteOpenHelper
     @Override
     public void onCreate(SQLiteDatabase db) {
         String query;
-        query="CREATE TABLE TotaltimeCall(Callid INTEGER PRIMARY KEY AUTOINCREMENT,Date TEXT, Number INTEGER, CallType TEXT, CallDuration INTEGER )";
+        query="CREATE TABLE TotaltimeCall(Callid INTEGER PRIMARY KEY AUTOINCREMENT,Date VARCHAR, Number VARCHAR, CallType VARCHAR, CallDuration VARCHAR )";
         db.execSQL(query);
         Log.d(LOGCAT, "TotalTimeCall Table Created");
     }
@@ -41,7 +41,7 @@ public class SqlLiteController extends SQLiteOpenHelper
         onCreate(db);
 
     }
-    public void insertTotaltimeCall(String Date,Integer Number, String CallType, Integer CallDuration) {
+    public void insertTotaltimeCall(String Date,String Number, String CallType, String CallDuration) {
         SQLiteDatabase db=this.getWritableDatabase();
         ContentValues values=new ContentValues();
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-DD HH:MM:SS");
@@ -53,7 +53,7 @@ public class SqlLiteController extends SQLiteOpenHelper
 
     }
 
-    public ArrayList<FetchDataFromTotalTimeCallDB> getDataFromTotalTimeCall()
+   /* public ArrayList<FetchDataFromTotalTimeCallDB> getDataFromTotalTimeCall()
     {
         ArrayList<FetchDataFromTotalTimeCallDB> fetchData = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -65,7 +65,7 @@ public class SqlLiteController extends SQLiteOpenHelper
 
                 fetchData.add(new FetchDataFromTotalTimeCallDB(
 
-                        c.getDate(0),        // id
+                        c.getString(c.getColumnIndex("Date")),        // id
                         c.getInt(1),     // title
                         c.getString(2),
                         c.getInt(3)// content
@@ -74,5 +74,5 @@ public class SqlLiteController extends SQLiteOpenHelper
             } while (c.moveToNext());
         }
         return fetchData;
-    }
+    }*/
 }
